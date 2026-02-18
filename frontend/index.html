@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MicroShop | Learned Microservices</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="app">
+        <nav class="navbar">
+            <div class="logo">MicroShop</div>
+            <div class="nav-links">
+                <button onclick="showView('shop')" class="nav-btn">Shop</button>
+                <button onclick="showView('orders')" class="nav-btn">My Orders</button>
+                <button onclick="showView('admin')" class="nav-btn admin-badge">Admin Panel</button>
+                <div id="user-info">
+                    <span id="username-display">Guest</span>
+                    <button onclick="logout()" id="logout-btn" style="display: none;">Logout</button>
+                    <span id="wallet-display"></span>
+                </div>
+            </div>
+        </nav>
+
+        <div id="toast-container"></div>
+
+        <!-- AUTH VIEW -->
+        <div id="view-auth" class="view active">
+            <div class="auth-container">
+                <div class="auth-box">
+                    <h2>Welcome to MicroShop</h2>
+                    <div class="tabs">
+                        <button onclick="switchAuth('login')" class="tab active">Login</button>
+                        <button onclick="switchAuth('register')" class="tab">Register</button>
+                    </div>
+
+                    <form id="login-form" onsubmit="handleLogin(event)">
+                        <input type="email" id="login-email" placeholder="Email (e.g., alice@example.com)" required>
+                        <button type="submit" class="primary-btn">Login</button>
+                    </form>
+
+                    <form id="register-form" onsubmit="handleRegister(event)" style="display: none;">
+                        <input type="text" id="reg-name" placeholder="Full Name" required>
+                        <input type="email" id="reg-email" placeholder="Email" required>
+                        <button type="submit" class="primary-btn">Create Account</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- SHOP VIEW -->
+        <div id="view-shop" class="view" style="display: none;">
+            <header class="page-header">
+                <h1>Products</h1>
+                <button onclick="fetchProducts()" class="refresh-btn">↻ Refresh</button>
+            </header>
+            <div id="products-grid" class="grid-container">
+                <!-- Products injected here -->
+            </div>
+        </div>
+
+        <!-- ORDERS VIEW -->
+        <div id="view-orders" class="view" style="display: none;">
+            <header class="page-header">
+                <h1>My Orders</h1>
+                <button onclick="fetchMyOrders()" class="refresh-btn">↻ Refresh</button>
+            </header>
+            <div id="orders-list" class="list-container">
+                <!-- Orders injected here -->
+            </div>
+        </div>
+
+        <!-- ADMIN VIEW -->
+        <div id="view-admin" class="view" style="display: none;">
+            <header class="page-header">
+                <h1>Admin Panel</h1>
+            </header>
+            <div class="admin-panel">
+                <div class="card">
+                    <h3>Add New Product</h3>
+                    <form onsubmit="handleCreateProduct(event)">
+                        <input type="text" id="prod-name" placeholder="Product Name" required>
+                        <input type="number" id="prod-price" placeholder="Price" step="0.01" required>
+                        <input type="number" id="prod-stock" placeholder="Initial Stock" required>
+                        <button type="submit" class="success-btn">Add Product</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <h3>System Status</h3>
+                    <div id="system-status">Checking...</div>
+                    <button onclick="checkSystemStatus()" class="secondary-btn">Check Connectivity</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="app.js"></script>
+</body>
+
+</html>

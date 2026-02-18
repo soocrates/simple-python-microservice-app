@@ -1,0 +1,54 @@
+
+services:
+
+  gateway_service:
+    build:
+      context: ./gateway_service
+    ports:
+      - "8080:8080"
+    depends_on:
+      - user_service
+      - product_service
+      - order_service
+    networks:
+      - microservices_network
+
+  # Frontend: The user interface
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"
+
+    depends_on:
+      - gateway_service
+    networks:
+      - microservices_network
+
+  user_service:
+    build:
+      context: ./user_service
+    ports:
+      - "8081:8081"
+    networks:
+      - microservices_network
+  product_service:
+    build:
+      context: ./product_service
+    ports:
+      - "8082:8082"
+    networks:
+      - microservices_network
+
+  order_service:
+    build:
+      context: ./order_service
+    ports:
+      - "8083:8083"
+    networks:
+      - microservices_network
+
+# Common network for inter-service communication
+networks:
+  microservices_network:
+    driver: bridge
