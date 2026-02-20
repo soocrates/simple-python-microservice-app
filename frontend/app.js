@@ -1,5 +1,5 @@
 // Use relative path for Nginx proxy
-const GATEWAY_URL = 'http://gateway_service:8080';
+const GATEWAY_URL = '/api';
 
 let currentUser = null;
 
@@ -234,6 +234,22 @@ async function checkSystemStatus() {
     } catch (err) {
         document.getElementById('system-status').innerHTML =
             `<span style="color: red">● Offline</span>`;
+    }
+}
+
+async function runStressTest() {
+    const sec = document.getElementById('stress-sec').value;
+    const intensity = document.getElementById('stress-int').value;
+    
+    showToast(`Triggering load for ${sec}s...`, 'info');
+    
+    try {
+        // This hits: http://localhost:3000/api/stress?seconds=15&intensity=2
+        const res = await fetch(`${GATEWAY_URL}/stress?seconds=${sec}&intensity=${intensity}`);
+        const data = await res.json();
+        showToast("Stress test active!", "success");
+    } catch (err) {
+        showToast("Failed to trigger stress", "error");
     }
 }
 

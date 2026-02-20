@@ -48,6 +48,17 @@ services:
     networks:
       - microservices_network
 
+  cpu_stress_service:
+    build:
+      context: ./cpu_stress_service
+    deploy:
+      resources:
+        limits:
+          cpus: '0.5' 
+          memory: 100M
+    networks:
+      - microservices_network
+
 # Common network for inter-service communication
 networks:
   microservices_network:

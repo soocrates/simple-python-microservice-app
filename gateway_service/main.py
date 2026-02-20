@@ -9,6 +9,11 @@ app = FastAPI()
 USER_SERVICE_URL = os.getenv("USER_SERVICE_URL", "http://user_service:8081")
 PRODUCT_SERVICE_URL = os.getenv("PRODUCT_SERVICE_URL", "http://product_service:8082")
 ORDER_SERVICE_URL = os.getenv("ORDER_SERVICE_URL", "http://order_service:8083")
+STRESS_SERVICE_URL = os.getenv("STRESS_SERVICE_URL", "http://cpu_stress_service:8084")
+
+# Inside your gateway function...
+
+# ...
 
 @app.get("/status")
 def get_status():
@@ -18,12 +23,14 @@ def get_status():
 async def gateway(path_name: str, request: Request):
     
     # Simple routing logic based on path prefix
-    if path_name.startswith("users"):
+    if path_name.startswith("users") or path_name.startswith("login") or path_name.startswith("register"):
         target_url = f"{USER_SERVICE_URL}/{path_name}"
     elif path_name.startswith("products"):
         target_url = f"{PRODUCT_SERVICE_URL}/{path_name}"
     elif path_name.startswith("orders"):
         target_url = f"{ORDER_SERVICE_URL}/{path_name}"
+    elif path_name.startswith("stress"):
+        target_url = f"{STRESS_SERVICE_URL}/{path_name}"
     else:
         raise HTTPException(status_code=404, detail="Route not found")
 
