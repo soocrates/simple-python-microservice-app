@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: order-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: order
+  template:
+    metadata:
+      labels:
+        app: order
+
+    spec:
+      containers:
+        - name: order
+          image: braindeamon/order
+          ports:
+            - containerPort: 8083
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gateway-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gateway
+  template:
+    metadata:
+      labels:
+        app: gateway
+
+    spec:
+      containers:
+        - name: gateway
+          image: braindeamon/gateway
+          ports:
+            - containerPort: 8080
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
+            - name: USER_SERVICE_URL
+              value: "http://user-service:8081"
+            - name: PRODUCT_SERVICE_URL
+              value: "http://product-service:8082"
+            - name: ORDER_SERVICE_URL
+              value: "http://order-service:8083"
+            - name: STRESS_SERVICE_URL
+              value: "http://stress-service:8084"

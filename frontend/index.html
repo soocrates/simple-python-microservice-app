@@ -75,6 +75,15 @@
 
         <!-- ADMIN VIEW -->
         <div id="view-admin" class="view" style="display: none;">
+            <div class="card" style="border: 2px solid #ff4757;">
+                <h3 style="color: #ff4757;">Chaos Engineering: Stress Test</h3>
+                <p>Inject CPU load to test autoscaling.</p>
+                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
+                    <input type="number" id="stress-sec" placeholder="Seconds" value="15" style="width: 80px;">
+                    <input type="number" id="stress-int" placeholder="Intensity" value="2" style="width: 80px;">
+            </div>
+            <button onclick="runStressTest()" class="primary-btn" style="background: #ff4757;">🔥 Start Stress Test</button>
+            </div>
             <header class="page-header">
                 <h1>Admin Panel</h1>
             </header>
@@ -95,15 +104,7 @@
                     <button onclick="checkSystemStatus()" class="secondary-btn">Check Connectivity</button>
                 </div>
             </div>
-            <div class="card" style="border: 2px solid #ff4757;">
-                <h3 style="color: #ff4757;">Chaos Engineering: Stress Test</h3>
-                <p>Inject CPU load to test autoscaling.</p>
-                <div style="display: flex; gap: 10px; margin-bottom: 10px;">
-                    <input type="number" id="stress-sec" placeholder="Seconds" value="15" style="width: 80px;">
-                    <input type="number" id="stress-int" placeholder="Intensity" value="2" style="width: 80px;">
-                </div>
-                <button onclick="runStressTest()" class="primary-btn" style="background: #ff4757;">🔥 Start Stress Test</button>
-            </div>
+
         </div>
     </div>
     <script src="app.js"></script>

@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-service # This is the name of the service, which will be used to access it within the cluster
+spec:
+  selector:
+    app: frontend # This should match the label in the deployment
+  ports:
+    - port: 80 # This is the port that the service will expose
+      targetPort: 80
+      nodePort: 30007
+  type: NodePort 

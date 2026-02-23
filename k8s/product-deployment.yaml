@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: product
+  template:
+    metadata:
+      labels:
+        app: product
+
+    spec:
+      containers:
+        - name: product
+          image: braindeamon/product
+          ports:
+            - containerPort: 8082
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"

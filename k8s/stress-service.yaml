@@ -1,0 +1,12 @@
+apiVersion: apps/v1
+kind: Service
+metadata:
+  name: stress-service
+spec:
+  selector:
+    app: stress
+  ports:
+    - port: 8084
+      targetPort: 8084
+      nodePort: 30004
+  type: ClusterIP
