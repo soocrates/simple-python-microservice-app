@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: product
-          image: braindeamon/product
+          image:  braindeamon/product_service:latest
           ports:
             - containerPort: 8082
           resources:
