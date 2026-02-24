@@ -16,6 +16,7 @@ spec:
       containers:
         - name: order
           image: braindeamon/order_service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8083
           resources:

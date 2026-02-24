@@ -16,6 +16,7 @@ spec:
       containers:
         - name: stress
           image:  braindeamon/stress_service:latest
+          imagePullPolicy: Always
           ports:
             - containerPort: 8084
           resources:
