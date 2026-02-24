@@ -8,5 +8,4 @@ spec:
   ports:
     - port: 8082
       targetPort: 8082
-      nodePort: 30002
   type: ClusterIP
